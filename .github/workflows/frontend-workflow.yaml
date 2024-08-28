@@ -50,7 +50,7 @@ jobs:
           name: Depcheck report
           path: ${{github.workspace}}/reports
 
-    - name: Run Trivy vulnerability scanner in repo mode
+    - name: Run Trivy vulnerability scanner in repo mode (FS Scan)
       uses: aquasecurity/trivy-action@0.20.0
       with:
         scan-type: 'fs'
