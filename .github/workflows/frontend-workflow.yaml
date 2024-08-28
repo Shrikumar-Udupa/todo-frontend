@@ -1,0 +1,52 @@
+name: build analyze, scan todo application
+on:
+  push:
+    branches:
+      - main
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+
+    - name: Run SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHB_TOKEN: ${{ secrets.GIT_TOKEN }}
+      with:
+        args: >
+          -Dsonar.projectKey=Shrikumar-Udupa_todo
+          -Dsonar.organization=cloudkubesec
+          -Dsonar.projectName=todo 
+
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache-dependency-path: frontend/package-lock.json
+    - run: npm install --prefix frontend/
+
+    - name: OWASP Depcheck
+      uses: dependency-check/Dependency-Check_Action@main
+      id: Depcheck
+      with:
+        project: 'test'
+        path: '.'
+        format: 'HTML'
+        out: 'reports' # this is the default, no need to specify unless you wish to override it
+        args: >
+          --enableRetired
+    - name: Upload Test results
+      uses: actions/upload-artifact@master
+      with:
+          name: Depcheck report
+          path: ${{github.workspace}}/reports
+
