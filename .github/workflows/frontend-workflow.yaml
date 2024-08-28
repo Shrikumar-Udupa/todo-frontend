@@ -86,7 +86,7 @@ jobs:
                 shrikumarudupa/todo-frontend:latest
 
     - name: Scan Docker Image with Trivy
-      uses: aquasecurity/trivy-action@v0.11.0
+      uses: aquasecurity/trivy-action@0.20.0
       with:
         image-ref: shrikumarudupa/todo-frontend:latest
         severity: HIGH,CRITICAL
