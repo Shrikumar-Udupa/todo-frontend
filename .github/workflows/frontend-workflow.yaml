@@ -82,8 +82,9 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: shrikumarudupa/todo-frontend:${{ github.run_number }}
-                shrikumarudupa/todo-frontend:latest
+        tags: |
+            shrikumarudupa/todo-frontend:${{ github.run_number }}
+            shrikumarudupa/todo-frontend:latest
 
     - name: Scan Docker Image with Trivy
       uses: aquasecurity/trivy-action@0.20.0
