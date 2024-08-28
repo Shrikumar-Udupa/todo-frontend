@@ -54,7 +54,7 @@ jobs:
           path: ${{github.workspace}}/reports
 
     - name: Run Trivy vulnerability scanner in repo mode (FS Scan)
-      uses: aquasecurity/trivy-action@0.20.0
+      uses: aquasecurity/trivy-action@0.11.0
       with:
         scan-type: 'fs'
         ignore-unfixed: true
@@ -86,7 +86,7 @@ jobs:
                 shrikumarudupa/todo-frontend:latest
 
     - name: Scan Docker Image with Trivy
-      uses: aquasecurity/trivy-action@v0.20.0
+      uses: aquasecurity/trivy-action@v0.11.0
       with:
         image-ref: shrikumarudupa/todo-frontend:latest
         severity: HIGH,CRITICAL
