@@ -23,9 +23,9 @@ jobs:
         GITHB_TOKEN: ${{ secrets.GIT_TOKEN }}
       with:
         args: >
-          -Dsonar.projectKey=Shrikumar-Udupa_todo
+          -Dsonar.projectKey=cloudkubesec_todo-frontend
           -Dsonar.organization=cloudkubesec
-          -Dsonar.projectName=todo 
+          -Dsonar.projectName=todo-frontend 
 
     - name: Use Node.js 18
       uses: actions/setup-node@v3
