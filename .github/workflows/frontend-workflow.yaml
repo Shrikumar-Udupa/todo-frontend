@@ -78,6 +78,7 @@ jobs:
 
     - name: Build docker image using dockerfile and push to dockerhub
       uses: docker/build-push-action@v5
+      run: pwd
       with:
         context: .
         file: .frontend/Dockerfile
