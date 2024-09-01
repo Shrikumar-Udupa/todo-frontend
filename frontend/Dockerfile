@@ -3,7 +3,7 @@ FROM node:21 AS frontend-builder
 # Set the working directory to /app
 WORKDIR /app
 # Copy the package.json and package-lock.json for dependency installation
-COPY package*.json .
+COPY frontend/package*.json .
 RUN ls -rtha /app
 # Install dependencies
 RUN npm install
