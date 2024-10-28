@@ -105,7 +105,7 @@ jobs:
       id: increment-tag
       run: |
         # Split the latest tag into an array
-        IFS='.' read -r -a parts <<< "${{ env.tag#v }}"
+        IFS='.' read -r -a parts <<< "${{ env.tag }}"
         major=${parts[0]}
         minor=${parts[1]}
         patch=${parts[2]}
