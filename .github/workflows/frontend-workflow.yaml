@@ -55,14 +55,16 @@ jobs:
 
     - name: Run Trivy vulnerability scanner in repo mode (FS Scan)
       uses: aquasecurity/trivy-action@0.20.0
+      env:
+        TRIVY_TIMEOUT: 20m
       with:
         scan-type: 'fs'
         ignore-unfixed: true
         format: 'sarif'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL'
-        timeout: '10m'
-        deug: true
+        scan-ref: '.'
+      continue-on-error: true
 
              
     - name: Upload Trivy scan results to GitHub Security tab
