@@ -95,7 +95,7 @@ jobs:
         format: table # You can use other formats like 'json' or 'sarif'
         ignore-unfixed: true # Optional: ignores vulnerabilities without a fix        
 
-  docker_image:
+  docker_image_scan:
     needs: build_test
     runs-on: ubuntu-latest
     permissions:
