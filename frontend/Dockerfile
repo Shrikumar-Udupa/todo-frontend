@@ -13,12 +13,10 @@ COPY . .
 FROM node:21-slim
 # Set the working directory to /app
 WORKDIR /app
-# Create a non-root user with UID 1000 and assign permissions
-RUN if ! getent group 1000; then groupadd -g 1000 appgroup; fi && \
-    if ! id -u appuser &>/dev/null; then useradd -u 1000 -g 1000 -m appuser; fi && \
-    chown -R appuser:appgroup /app
-# Switch to the non-root user
-USER appuser
+# Use the existing node user and set permissions for the application directory
+RUN chown -R node:node /app
+# Switch to the non-root user with UID 1000 (node)
+USER node
 # Expose port 3000 for the Node.js application
 EXPOSE 3000
 # Copy built assets and dependencies from frontend-builder stage
