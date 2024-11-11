@@ -136,7 +136,7 @@ jobs:
     - name: Scan Docker Image with Trivy
       uses: aquasecurity/trivy-action@0.20.0
       with:
-        image-ref: 825765396418.dkr.ecr.us-east-1.amazonaws.com/todo-backend:latest
+        image-ref: 825765396418.dkr.ecr.us-east-1.amazonaws.com/todo-frontend:latest
         severity: HIGH,CRITICAL
         format: table # You can use other formats like 'json' or 'sarif'
         ignore-unfixed: true # Optional: ignores vulnerabilities without a fix
