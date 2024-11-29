@@ -1,7 +1,7 @@
 # ------------------- Stage 1: Build Stage ------------------------------
 
 # Stage 1: Builder
-FROM node:16 AS frontend-builder
+FROM node AS frontend-builder
 
 # Set the working directory to /app
 WORKDIR /app
