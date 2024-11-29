@@ -1,7 +1,7 @@
 # ------------------- Stage 1: Build Stage ------------------------------
 
 # Stage 1: Builder
-FROM node AS builder
+FROM node:16 AS frontend-builder
 
 # Set the working directory to /app
 WORKDIR /app
@@ -27,7 +27,7 @@ FROM node:current-slim
 WORKDIR /app
 
 # Copy built assets and dependencies from frontend-builder stage
-COPY --from=builder /app ./
+COPY --from=frontend-builder /app ./
 
 # Expose the application port
 EXPOSE 3000
