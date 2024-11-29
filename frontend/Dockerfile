@@ -1,25 +1,36 @@
 # ------------------- Stage 1: Build Stage ------------------------------
-FROM node:21 AS frontend-builder
+
+# Stage 1: Builder
+FROM node AS builder
+
 # Set the working directory to /app
 WORKDIR /app
+
 # Copy the package.json and package-lock.json for dependency installation
-COPY package*.json ./
+COPY package.json package-lock.json ./
+
 # Install dependencies
 RUN npm install
+
 # Copy the rest of the application code
-COPY . .
+COPY . ./
+
+# Build the production assets (useful for frontend apps)
+RUN npm run build
+
 
 # ------------------- Stage 2: Final Stage ------------------------------
-FROM node:21-slim
+# Stage 2: Runner
+FROM node:current-slim
+
 # Set the working directory to /app
 WORKDIR /app
-# Use the existing node user and set permissions for the application directory
-RUN chown -R node:node /app
-# Switch to the non-root user with UID 1000 (node)
-USER node
-# Expose port 3000 for the Node.js application
-EXPOSE 3000
+
 # Copy built assets and dependencies from frontend-builder stage
-COPY --from=frontend-builder /app .
+COPY --from=builder /app ./
+
+# Expose the application port
+EXPOSE 3000
+
 # Define the default command to run the application
-CMD [ "npm", "start" ]
+CMD ["npm", "start"]
