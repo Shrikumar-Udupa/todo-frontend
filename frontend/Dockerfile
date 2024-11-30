@@ -26,7 +26,7 @@
     USER node
     
     # Copy built assets and dependencies from frontend-builder stage
-    COPY --from=frontend-builder /app ./
+    COPY --from=frontend-builder --chown=node:node /app ./
     
     # Expose the application port
     EXPOSE 3000
