@@ -29,8 +29,6 @@ WORKDIR /app
 # Copy built assets and dependencies from frontend-builder stage
 COPY --from=frontend-builder /app ./
 
-RUN pwd && cd /app && ls -lrth
-
 # Expose the application port
 EXPOSE 3000
 
